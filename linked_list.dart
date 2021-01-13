@@ -11,24 +11,28 @@
 // deletelast
 // contains
 // indexOf
+import 'package:kt_dart/exception.dart';
 
 
 void main() {
-  var exemple = Llist();
+  Llist exemple = Llist();
   exemple.addLast(10);
   exemple.addLast(123);
   exemple.addLast(12);
   exemple.addLast(23);
   exemple.addFirst(3);
+  exemple.addFirst(29);
+  exemple.deleteFirst();
 
   print(exemple.indexOf(123));
+  print(exemple.contains(3));
 }
 
 class _NodeClass{
   // node la bezwen yon valeur kanmenm!
   int value;
   _NodeClass(this.value);
-  // konnen node ki deyel la
+  // konnen node ki deyel la (link la)
   _NodeClass next;
 }
 
@@ -42,9 +46,9 @@ class Llist{
   }
 
   // function sa ap fenn mete yon linklist en dernier
-  void addLast(int data){
+  void addLast(int item){
     // nous creer yon node
-    _NodeClass nodeObject = _NodeClass(data);
+    _NodeClass nodeObject = _NodeClass(item);
 
     if(_isEmpty()){
       _first = _last = nodeObject;
@@ -74,6 +78,25 @@ class Llist{
       index++;
     }
     return -1;
+  }
+
+  bool contains(int item){
+    return indexOf(item) != -1;
+  }
+
+  void deleteFirst(){
+    if(_isEmpty()){
+      throw new NoSuchElementException();
+    }
+
+    if(_first == _last){
+      _first = _last = null;
+      return;
+    }
+
+    var second = _first.next;
+    _first.next = null;
+    _first = second;
   }
 
 

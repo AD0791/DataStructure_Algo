@@ -1,0 +1,3 @@
+name: dataStructure_course
+dependencies:
+  kt_dart: ^0.5.0
